@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Acceso a los tableros de seguimiento de la interventoría de las ciclorrutas de la Sabana (ICCU): estado predial y estado ambiental.">
+<title>Tableros Ciclorrutas Sabana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap">
+<style>
+  /* Portada de dos accesos: encabezado sobrio y dos tarjetas grandes, una por tablero. */
+  :root {
+    --bg: #f6f7f4; --panel: #ffffff; --fg: #1d2420; --muted: #5b655f; --line: #dde2dc;
+    --predial: #2f6fd6; --ambiental: #2e8b57; --ruta: #c9d3cb;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #151a17; --panel: #1d2420; --fg: #e7ece8; --muted: #a3ada6; --line: #333d37;
+      --predial: #6b9cf0; --ambiental: #4fb57d; --ruta: #34403a; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg: #151a17; --panel: #1d2420; --fg: #e7ece8; --muted: #a3ada6; --line: #333d37;
+    --predial: #6b9cf0; --ambiental: #4fb57d; --ruta: #34403a; color-scheme: dark; }
+  html, body { margin: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.5; }
+  .wrap { max-width: 1040px; margin: 0 auto; box-sizing: border-box; padding-block: 40px 48px;
+          padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .eyebrow { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 8px 0 10px; text-wrap: balance; }
+  .lede { color: var(--muted); max-width: 62ch; margin: 0; }
+  .ruta { display: block; width: 100%; height: 44px; margin: 28px 0 24px; }
+  .ruta path { fill: none; stroke: var(--ruta); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 9; }
+  .ruta circle { stroke: var(--bg); stroke-width: 3; }
+  .tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .tarjeta { position: relative; display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 24px; border-radius: 12px;
+             background: var(--panel); border: 1px solid var(--line); color: inherit; text-decoration: none;
+             transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease; }
+  .tarjeta::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; border-radius: 12px 12px 0 0; background: var(--c); }
+  .tarjeta:hover { border-color: var(--c); box-shadow: 0 8px 24px rgba(20, 30, 25, .10); }
+  .tarjeta:focus-visible { outline: 3px solid var(--c); outline-offset: 3px; }
+  @media (prefers-reduced-motion: no-preference) { .tarjeta:hover { transform: translateY(-2px); } }
+  .predial { --c: var(--predial); } .ambiental { --c: var(--ambiental); }
+  .tag { align-self: flex-start; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--c); }
+  .tarjeta h2 { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.15; margin: 0; }
+  .tarjeta p { margin: 0; color: var(--muted); }
+  .tarjeta ul { margin: 0; padding-left: 18px; color: var(--fg); font-size: 14px; display: grid; gap: 4px; }
+  .abrir { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--c); }
+  .abrir svg { width: 16px; height: 16px; }
+  .fuentes { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: grid; gap: 6px; }
+  .fuentes a { color: inherit; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="eyebrow">Interventoría · Ciclorrutas Sabana · ICCU</p>
+  <h1>Tableros de seguimiento de obra</h1>
+  <p class="lede">Elija el tablero que necesita consultar. Ambos se actualizan solos con las hojas de cálculo del proyecto cada vez que se abren.</p>
+
+  <svg class="ruta" viewBox="0 0 1000 44" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M6 30 C 160 6, 300 40, 470 22 S 800 6, 994 26"></path>
+    <circle cx="6" cy="30" r="7" fill="var(--predial)"></circle>
+    <circle cx="994" cy="26" r="7" fill="var(--ambiental)"></circle>
+  </svg>
+
+  <section class="tarjetas" aria-label="Tableros disponibles">
+    <a class="tarjeta predial" href="https://dacortesn.github.io/restricciones-interventoria/" id="tablero-predial">
+      <span class="tag">ESTADO PREDIAL · INTERVENTORÍA</span>
+      <h2>Matriz de restricciones por tramo</h2>
+      <p>Seguimiento de la interventoría a la liberación predial de cada tramo.</p>
+      <ul>
+        <li>Semáforo de restricciones por tramo</li>
+        <li>Predios IGAC sobre el corredor</li>
+        <li>Mapa con calles, satélite y su ubicación</li>
+      </ul>
+      <span class="abrir">Abrir tablero
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </a>
+
+    <a class="tarjeta ambiental" href="https://dacortesn.github.io/Estado-ambiental-ciclosabana/" id="tablero-ambiental">
+      <span class="tag">ESTADO AMBIENTAL</span>
+      <h2>Permisos ambientales por tramo</h2>
+      <p>Trámites ante la CAR de los tramos 5 a 10 y su relación con los frentes de obra.</p>
+      <ul>
+        <li>Permisos vencidos y próximos a vencer</li>
+        <li>Estado del trámite, tipo de permiso y ejecución</li>
+        <li>Mapa con calles, satélite y predios IGAC</li>
+      </ul>
+      <span class="abrir">Abrir tablero
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </a>
+  </section>
+
+  <footer class="fuentes">
+    <span>Estado predial: hoja «MATRIZ RESTRICCIONES». Estado ambiental: hoja «Permisos ambientales otorgados para el CTO 1246/2023».</span>
+    <span>Ejes y abscisado: KML del proyecto. Predios: capa de terrenos del IGAC (SINIC_DA).</span>
+  </footer>
+</main>
+</body>
+</html>
